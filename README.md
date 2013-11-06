@@ -1,4 +1,4 @@
 gdb_pretty-printers
 ===================
 
-Conversion of the pretty-printers of gdb for the version 3 of python
+Conversion of the official pretty-printers for gdb for the version 3 of python
