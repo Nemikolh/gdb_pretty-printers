@@ -95,9 +95,9 @@ class StdListPrinter:
             self.count = 0
 
         def __iter__(self):
-            return iter(self)
+            return self
 
-        def next(self):
+        def __next__(self):
             if self.base == self.head:
                 raise StopIteration
             elt = self.base.cast(self.nodetype).dereference()
@@ -142,9 +142,9 @@ class StdSlistPrinter:
             self.count = 0
 
         def __iter__(self):
-            return iter(self)
+            return self
 
-        def next(self):
+        def __next__(self):
             if self.base == 0:
                 raise StopIteration
             elt = self.base.cast(self.nodetype).dereference()
@@ -196,9 +196,9 @@ class StdVectorPrinter:
             self.count = 0
 
         def __iter__(self):
-            return iter(self)
+            return self
 
-        def next(self):
+        def __next__(self):
             count = self.count
             self.count = self.count + 1
             if self.bitvec:
@@ -280,7 +280,7 @@ class StdTuplePrinter:
             self.count = 0
 
         def __iter__ (self):
-            return iter(self)
+            return self
 
         def next (self):
             nodes = self.head.type.fields ()
@@ -348,12 +348,12 @@ class RbtreeIterator:
         self.count = 0
 
     def __iter__(self):
-        return iter(self)
+        return self
 
     def __len__(self):
         return int (self.size)
 
-    def next(self):
+    def __next__(self):
         if self.count == self.size:
             raise StopIteration
         result = self.node
@@ -412,11 +412,11 @@ class StdMapPrinter:
             self.type = type
 
         def __iter__(self):
-            return iter(self)
+            return self
 
-        def next(self):
+        def __next__(self):
             if self.count % 2 == 0:
-                n = self.rbiter.next()
+                n = self.rbiter.__next__()
                 n = n.cast(self.type).dereference()['_M_value_field']
                 self.pair = n
                 item = n['first']
@@ -454,7 +454,7 @@ class StdSetPrinter:
             self.type = type
 
         def __iter__(self):
-            return iter(self)
+            return self
 
         def next(self):
             item = self.rbiter.next()
@@ -532,7 +532,7 @@ class StdDequePrinter:
             self.count = 0
 
         def __iter__(self):
-            return iter(self)
+            return self
 
         def next(self):
             if self.p == self.last:
@@ -633,9 +633,9 @@ class Tr1HashtableIterator:
             self.bucket = self.bucket + 1        
 
     def __iter__ (self):
-        return iter(self)
+        return self
 
-    def next (self):
+    def __next__ (self):
         if self.node == 0:
             raise StopIteration
         node = self.node.cast(self.node_type)
@@ -656,7 +656,7 @@ class StdHashtableIterator:
         self.node_type = find_type(hash.type, '__node_type').pointer()
 
     def __iter__(self):
-        return iter(self)
+        return self
 
     def next(self):
         if self.node == 0:
@@ -746,9 +746,9 @@ class StdForwardListPrinter:
             self.count = 0
 
         def __iter__(self):
-            return iter(self)
+            return self
 
-        def next(self):
+        def __next__(self):
             if self.base == 0:
                 raise StopIteration
             elt = self.base.cast(self.nodetype).dereference()
