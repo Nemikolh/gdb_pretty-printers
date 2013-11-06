@@ -282,7 +282,7 @@ class StdTuplePrinter:
         def __iter__ (self):
             return self
 
-        def next (self):
+        def __next__(self):
             nodes = self.head.type.fields ()
             # Check for further recursions in the inheritance tree.
             if len (nodes) == 0:
